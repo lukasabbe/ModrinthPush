@@ -1,5 +1,28 @@
 {
-    "pushProjects": ["gLT5Flq2"],
-    "fillDatabase": false,
-    "intervalSeconds": 10
+    "pushProjects": [
+        "rOrXjyPb",
+        "n3adpCWr",
+        "jh3omEDF",
+        "NJiz0kE3",
+        "uMOCGOhm",
+        "h9bitqRu", 
+        "un7urasP",
+        "OLvJYiZO",
+        "pMLnf3Ma",
+        "m5jDoXaM",
+        "lTOqziWV",
+        "yzOMuy9y",
+        "qYcWMVjB",
+        "zitKUUW9",
+        "mLelmInB",
+        "7OQY3NQS",
+        "FDg9nmKX",
+        "WmAmslke",
+        "gLT5Flq2",
+        "Ftifu6C1",
+        "JSz2okz8",
+        "msBlBDLY"
+    ],
+    "fillDatabase": true,
+    "intervalSeconds": 60
 }
