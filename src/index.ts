@@ -20,18 +20,19 @@ const webhookClient = new WebhookClient({ url: process.env.DISCORD_WEBHOOK_URL |
 
 const getProject = async (projectId: string) => {
     const res = await fetch(`https://api.modrinth.com/v2/project/${projectId}`);
-    if (!res.ok) throw new Error(`Failed to fetch project ${projectId}`);
+    if (!res.ok) return null;
     return await res.json() as ModrinthProject;
 }
 
 const getVersion = async (versionId: string) => {
     const res = await fetch(`https://api.modrinth.com/v2/version/${versionId}`);
-    if (!res.ok) throw new Error(`Failed to fetch version ${versionId}`);
+    if (!res.ok) return null;
     return await res.json() as ModrinthVersion;
 }
 
 const sendPush = async (projectId: ModrinthProject, versionId: string) => {
     const version = await getVersion(versionId);
+    if (!version) return;
     const embed = new EmbedBuilder()
         .setTitle(`New version for ${projectId.title}`)
         .setURL(`https://modrinth.com/project/${projectId.id}/version/${versionId}`)
@@ -49,6 +50,9 @@ const sendPush = async (projectId: ModrinthProject, versionId: string) => {
 const run = async (settings: Settings, db: sqlite3.Database) => {
     for (const projectId of settings.pushProjects) {
         const project = await getProject(projectId);
+
+        if(!project) continue;
+        
         for (const versionId of project.versions) {
             db.get("SELECT id FROM versions WHERE id = ? AND projectId = ?", [versionId, projectId], (err, row) => {
                 if (err) {
